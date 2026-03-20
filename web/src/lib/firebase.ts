@@ -11,29 +11,31 @@ const rawConfig = {
   appId: import.meta.env.EXPO_PUBLIC_FIREBASE_APP_ID,
 };
 
+const useEmulators = import.meta.env.EXPO_PUBLIC_USE_FIREBASE_EMULATORS === 'true';
+
 function looksLikePlaceholder(value?: string) {
-  if (!value) {
+  const normalizedValue = value?.trim();
+  if (!normalizedValue) {
     return true;
   }
 
-  return (
-    value.includes('your-') ||
-    value.includes('1234567890') ||
-    value.includes('abcdef123456') ||
-    value.includes('firebaseapp.com') ||
-    value.includes('firebasestorage.app')
-  );
+  return [
+    'your-api-key',
+    'your-project.firebaseapp.com',
+    'your-project-id',
+    'your-project.firebasestorage.app',
+    '1234567890',
+    '1:1234567890:web:abcdef123456',
+  ].includes(normalizedValue);
 }
 
 export const isFirebaseConfigured = Object.values(rawConfig).every(
-  (value) => value && !looksLikePlaceholder(value),
+  (value) => value && (useEmulators || !looksLikePlaceholder(value)),
 );
 
 const app = isFirebaseConfigured ? initializeApp(rawConfig) : null;
 export const auth = app ? getAuth(app) : null;
 export const db = app ? getFirestore(app) : null;
-
-const useEmulators = import.meta.env.EXPO_PUBLIC_USE_FIREBASE_EMULATORS === 'true';
 const emulatorHost = import.meta.env.EXPO_PUBLIC_FIREBASE_EMULATOR_HOST || 'localhost';
 const authPort = Number(import.meta.env.EXPO_PUBLIC_FIREBASE_AUTH_EMULATOR_PORT || 9099);
 const firestorePort = Number(

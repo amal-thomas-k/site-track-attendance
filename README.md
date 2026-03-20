@@ -206,6 +206,8 @@ EXPO_PUBLIC_FIREBASE_AUTH_EMULATOR_PORT=9099
 EXPO_PUBLIC_FIREBASE_FIRESTORE_EMULATOR_PORT=8085
 ```
 
+You can start from `.env.example` for emulator mode. The hosted web app now accepts the sample Firebase values when `EXPO_PUBLIC_USE_FIREBASE_EMULATORS=true`.
+
 ### Run With Docker Compose
 
 Web app only, using real Firebase:

@@ -1,7 +1,22 @@
 FROM node:20-bookworm-slim
 
+ARG TARGETARCH
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV JAVA_HOME=/opt/java/openjdk
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends openjdk-17-jre-headless ca-certificates \
+  && apt-get install -y --no-install-recommends ca-certificates curl \
+  && case "${TARGETARCH}" in \
+    "arm64") JAVA_ARCH="aarch64" ;; \
+    "amd64") JAVA_ARCH="x64" ;; \
+    *) echo "Unsupported TARGETARCH: ${TARGETARCH}" && exit 1 ;; \
+  esac \
+  && curl -fsSL "https://api.adoptium.net/v3/binary/latest/21/ga/linux/${JAVA_ARCH}/jre/hotspot/normal/eclipse?project=jdk" -o /tmp/jre21.tar.gz \
+  && mkdir -p "${JAVA_HOME}" \
+  && tar -xzf /tmp/jre21.tar.gz --strip-components=1 -C "${JAVA_HOME}" \
+  && rm /tmp/jre21.tar.gz \
   && npm install -g firebase-tools \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
@@ -19,5 +34,8 @@ RUN cd functions && npm run build
 RUN mkdir -p /app/.firebase-data
 
 EXPOSE 4000 5001 8085 9099
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=5 \
+  CMD curl -fsS http://127.0.0.1:4000 >/dev/null || exit 1
 
 CMD ["firebase", "emulators:start", "--project", "demo-sitetrack", "--only", "auth,firestore,functions", "--import=/app/.firebase-data", "--export-on-exit=/app/.firebase-data"]
