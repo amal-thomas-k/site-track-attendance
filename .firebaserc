@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "prod": "sitetrack-attendance-prod"
+  },
+  "targets": {},
+  "etags": {}
+}
