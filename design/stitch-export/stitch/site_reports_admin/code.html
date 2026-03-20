@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Site Reports - Digital Foreman</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#4d2600",
+              "surface-container-lowest": "#001111",
+              "outline": "#a48c7a",
+              "surface-tint": "#ffb77d",
+              "on-error": "#690005",
+              "tertiary": "#85cfff",
+              "on-error-container": "#ffdad6",
+              "background": "#001717",
+              "on-primary-container": "#623200",
+              "on-surface-variant": "#ddc1ae",
+              "tertiary-fixed": "#c7e7ff",
+              "surface-container": "#002424",
+              "surface": "#001717",
+              "primary-fixed-dim": "#ffb77d",
+              "secondary-container": "#6a3b0f",
+              "primary-fixed": "#ffdcc3",
+              "on-tertiary": "#00344c",
+              "secondary": "#fdb881",
+              "primary": "#ffb77d",
+              "inverse-primary": "#904d00",
+              "inverse-on-surface": "#143535",
+              "secondary-fixed": "#ffdcc3",
+              "secondary-fixed-dim": "#fdb881",
+              "on-tertiary-fixed-variant": "#004c6c",
+              "tertiary-fixed-dim": "#85cfff",
+              "surface-variant": "#193a3a",
+              "on-secondary-container": "#e9a771",
+              "on-primary-fixed": "#2f1500",
+              "on-secondary-fixed": "#2f1500",
+              "error": "#ffb4ab",
+              "on-secondary-fixed-variant": "#6a3b0f",
+              "surface-bright": "#1e3e3e",
+              "inverse-surface": "#c6e9e9",
+              "error-container": "#93000a",
+              "on-tertiary-fixed": "#001e2e",
+              "surface-container-low": "#002020",
+              "on-primary-fixed-variant": "#6e3900",
+              "on-secondary": "#4d2600",
+              "outline-variant": "#564334",
+              "primary-container": "#ff8c00",
+              "on-surface": "#c6e9e9",
+              "on-background": "#c6e9e9",
+              "surface-container-highest": "#193a3a",
+              "on-tertiary-container": "#004360",
+              "surface-container-high": "#0c2f2f",
+              "tertiary-container": "#00b5fc",
+              "surface-dim": "#001717"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift-no-borders {
+            border: none !important;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-[#001717] dark:bg-[#001717] flex justify-between items-center w-full px-6 py-4 docked full-width top-0 border-none sticky z-40 bg-[#002424] tonal-shift-no-borders">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#ff8c00] dark:text-[#ffb77d] cursor-pointer active:scale-95 duration-100">menu</span>
+<h1 class="text-[#ff8c00] dark:text-[#ffb77d] font-['Space_Grotesk'] font-bold tracking-tight text-2xl tracking-tighter">Site Reports</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 mr-6">
+<span class="text-[#c6e9e9] opacity-70 font-['Inter'] text-sm font-bold uppercase tracking-wider hover:bg-[#0c2f2f] transition-colors duration-200 px-2 py-1 cursor-pointer">Dashboard</span>
+<span class="text-[#ff8c00] font-bold font-['Inter'] text-sm uppercase tracking-wider px-2 py-1 border-b-2 border-[#ff8c00]">Reports</span>
+<span class="text-[#c6e9e9] opacity-70 font-['Inter'] text-sm font-bold uppercase tracking-wider hover:bg-[#0c2f2f] transition-colors duration-200 px-2 py-1 cursor-pointer">Personnel</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="User profile avatar photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhYpieUW24hFPfIq6iXdJJo6ZSs6kECigJ9tTeNmjhWLaMEwewcfCvzhaubmRSAX787XtMyG_FmRvZyC0tEYdP2oNXWmeEbJNA003EMEUCsmTq4R2Qpra420na1CYhHYglB7PeJY5_536nKM3mzPoaNh5HKDH2dqT4Tvh8erIVJB4C_F2as4fNzNMaQszdeyAUD6pzltHxkRkot96y6w_CVmgEHLZJeNmXNjj6Fmxx-6OmzNBWOCNr-DHQaEhjcknq8nzU8lOk8g"/>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 pt-8">
+<!-- Search Section -->
+<section class="mb-10">
+<div class="relative max-w-2xl">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-lowest border-none focus:ring-2 focus:ring-primary py-4 pl-12 pr-4 text-on-surface rounded-lg placeholder:text-on-surface-variant/50 font-medium" placeholder="Search specific reports by ID, name, or date..." type="text"/>
+</div>
+</section>
+<!-- Primary Report Categories (Bento Style) -->
+<section class="mb-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Attendance Summaries -->
+<div class="group bg-surface-container-high p-8 rounded-xl flex flex-col justify-between min-h-[280px] hover:bg-surface-bright transition-all cursor-pointer relative overflow-hidden active:scale-[0.98]">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-9xl" style="font-variation-settings: 'FILL' 1;">badge</span>
+</div>
+<div>
+<div class="w-12 h-12 bg-primary-container/20 rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">badge</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-on-surface mb-2">Attendance Summaries</h3>
+<p class="text-on-surface-variant font-medium leading-relaxed">Weekly check-in logs and worker reliability scores for current job sites.</p>
+</div>
+<div class="flex items-center text-primary font-bold mt-6 group-hover:translate-x-2 transition-transform">
+                        GENERATE REPORT <span class="material-symbols-outlined ml-2">arrow_forward</span>
+</div>
+</div>
+<!-- Safety Compliance -->
+<div class="group bg-surface-container-high p-8 rounded-xl flex flex-col justify-between min-h-[280px] hover:bg-surface-bright transition-all cursor-pointer relative overflow-hidden active:scale-[0.98]">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-9xl" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+</div>
+<div>
+<div class="w-12 h-12 bg-tertiary/20 rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-on-surface mb-2">Safety Compliance</h3>
+<p class="text-on-surface-variant font-medium leading-relaxed">Incident reporting, certification audits, and PPE equipment inspections.</p>
+</div>
+<div class="flex items-center text-tertiary font-bold mt-6 group-hover:translate-x-2 transition-transform">
+                        AUDIT SAFETY <span class="material-symbols-outlined ml-2">arrow_forward</span>
+</div>
+</div>
+<!-- Payroll Ready Exports -->
+<div class="group bg-surface-container-high p-8 rounded-xl flex flex-col justify-between min-h-[280px] hover:bg-surface-bright transition-all cursor-pointer relative overflow-hidden active:scale-[0.98]">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-9xl" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<div>
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-on-surface mb-2">Payroll Ready Exports</h3>
+<p class="text-on-surface-variant font-medium leading-relaxed">Validated timesheets and labor cost allocations formatted for ERP import.</p>
+</div>
+<div class="flex items-center text-primary font-bold mt-6 group-hover:translate-x-2 transition-transform">
+                        EXPORT DATA <span class="material-symbols-outlined ml-2">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Reports Section -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline text-xl font-bold uppercase tracking-widest text-on-surface-variant">Recent Reports</h2>
+<button class="text-primary font-bold text-sm hover:underline">VIEW ARCHIVE</button>
+</div>
+<div class="space-y-3">
+<!-- Report Item 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest rounded flex items-center justify-center text-error">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div>
+<div class="font-bold text-on-surface group-hover:text-primary transition-colors">Q3_Safety_Audit_Final.pdf</div>
+<div class="text-xs text-on-surface-variant font-medium">Generated Oct 12, 2023 • 4.2 MB</div>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/20 text-on-surface-variant hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<!-- Report Item 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-surface-container-high transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest rounded flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<div class="font-bold text-on-surface group-hover:text-primary transition-colors">Attendance_Week_41_Full.csv</div>
+<div class="text-xs text-on-surface-variant font-medium">Generated Oct 10, 2023 • 128 KB</div>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/20 text-on-surface-variant hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<!-- Report Item 3 -->
+<div class="flex items-center justify-between p-4 bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest rounded flex items-center justify-center text-error">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div>
+<div class="font-bold text-on-surface group-hover:text-primary transition-colors">Payroll_Ready_Export_October.pdf</div>
+<div class="text-xs text-on-surface-variant font-medium">Generated Oct 05, 2023 • 2.1 MB</div>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/20 text-on-surface-variant hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<!-- Report Item 4 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-surface-container-high transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest rounded flex items-center justify-center text-error">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div>
+<div class="font-bold text-on-surface group-hover:text-primary transition-colors">Quarterly_Incident_Recap.pdf</div>
+<div class="text-xs text-on-surface-variant font-medium">Generated Sep 30, 2023 • 5.8 MB</div>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/20 text-on-surface-variant hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 bg-[#002020] px-4 z-50">
+<div class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-60 px-4 py-1 hover:text-[#ffb77d] transition-all active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-wider">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#ff8c00] text-[#623200] rounded-sm px-4 py-1 active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-wider">Reports</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-60 px-4 py-1 hover:text-[#ffb77d] transition-all active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">engineering</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-wider">Personnel</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-60 px-4 py-1 hover:text-[#ffb77d] transition-all active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-wider">Settings</span>
+</div>
+</nav>
+<!-- Floating Action Button - Supressed on this sub-page as per instructions for focus -->
+</body></html>

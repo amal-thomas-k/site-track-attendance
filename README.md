@@ -50,7 +50,23 @@ src/
 
 functions/
   src/             Firebase Cloud Function for admin notifications
+
+design/
+  stitch-export/   Stitch design export, screenshots, HTML mockups, and analysis
 ```
+
+## Design References
+
+The repository now includes the Stitch design handoff package in `design/stitch-export/`.
+
+This is stored as a reference/design artifact set:
+
+- the original exported zip
+- extracted screenshots
+- Stitch-generated HTML mockups
+- a local analysis README explaining how to use it
+
+These files are not part of the running Expo app, but they are useful for UI redesign work and stakeholder review.
 
 ## Worker Experience
 

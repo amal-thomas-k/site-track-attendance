@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SiteTrack Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-low": "#002020",
+              "surface-container-highest": "#193a3a",
+              "on-primary": "#4d2600",
+              "tertiary-fixed": "#c7e7ff",
+              "error-container": "#93000a",
+              "surface-bright": "#1e3e3e",
+              "surface": "#001717",
+              "on-secondary-container": "#e9a771",
+              "on-surface-variant": "#ddc1ae",
+              "on-secondary-fixed-variant": "#6a3b0f",
+              "on-secondary-fixed": "#2f1500",
+              "on-tertiary-fixed-variant": "#004c6c",
+              "on-surface": "#c6e9e9",
+              "inverse-surface": "#c6e9e9",
+              "tertiary-fixed-dim": "#85cfff",
+              "secondary-fixed-dim": "#fdb881",
+              "outline": "#a48c7a",
+              "on-background": "#c6e9e9",
+              "inverse-on-surface": "#143535",
+              "on-tertiary-fixed": "#001e2e",
+              "primary-fixed": "#ffdcc3",
+              "tertiary-container": "#00b5fc",
+              "tertiary": "#85cfff",
+              "inverse-primary": "#904d00",
+              "secondary-fixed": "#ffdcc3",
+              "primary-container": "#ff8c00",
+              "on-error-container": "#ffdad6",
+              "surface-tint": "#ffb77d",
+              "background": "#001717",
+              "outline-variant": "#564334",
+              "error": "#ffb4ab",
+              "surface-variant": "#193a3a",
+              "on-tertiary": "#00344c",
+              "surface-dim": "#001717",
+              "on-primary-fixed": "#2f1500",
+              "primary": "#ffb77d",
+              "on-error": "#690005",
+              "secondary-container": "#6a3b0f",
+              "primary-fixed-dim": "#ffb77d",
+              "on-secondary": "#4d2600",
+              "on-tertiary-container": "#004360",
+              "on-primary-container": "#623200",
+              "on-primary-fixed-variant": "#6e3900",
+              "surface-container-high": "#0c2f2f",
+              "surface-container": "#002424",
+              "secondary": "#fdb881",
+              "surface-container-lowest": "#001111"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        body {
+            background-color: #001717;
+            color: #c6e9e9;
+            font-family: 'Inter', sans-serif;
+        }
+        .headline-font { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col pb-20 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-[#001717] dark:bg-[#001717] flex justify-between items-center w-full px-6 h-16 docked full-width top-0 border-b-0 z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#ff8c00] dark:text-[#ff8c00] text-2xl" data-icon="precision_manufacturing">precision_manufacturing</span>
+<h1 class="font-['Space_Grotesk'] font-bold tracking-tight text-xl font-black text-[#ff8c00] dark:text-[#ff8c00] uppercase tracking-wider">SiteTrack</h1>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex gap-8 items-center h-full">
+<a class="text-[#ff8c00] font-['Space_Grotesk'] font-bold text-sm uppercase tracking-widest border-b-2 border-[#ff8c00] h-full flex items-center" href="#">Dashboard</a>
+<a class="text-[#c6e9e9] font-['Space_Grotesk'] font-bold text-sm uppercase tracking-widest hover:text-[#ff8c00] transition-colors h-full flex items-center" href="#">Workers</a>
+<a class="text-[#c6e9e9] font-['Space_Grotesk'] font-bold text-sm uppercase tracking-widest hover:text-[#ff8c00] transition-colors h-full flex items-center" href="#">Reports</a>
+<a class="text-[#c6e9e9] font-['Space_Grotesk'] font-bold text-sm uppercase tracking-widest hover:text-[#ff8c00] transition-colors h-full flex items-center" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="text-right hidden sm:block">
+<p class="text-[10px] font-bold uppercase tracking-tighter opacity-60">Admin Access</p>
+<p class="text-xs font-bold font-headline">R. Foreman</p>
+</div>
+<div class="w-10 h-10 bg-surface-container-highest rounded-sm border border-outline-variant/20 overflow-hidden">
+<img alt="Admin Profile Photo" class="w-full h-full object-cover" data-alt="Headshot of a middle aged man wearing a hard hat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfAoyw61K7hRIWQ5fSHXrfrRN-6Jp1fA5rr6jtc_GZvi9MWGcF-CmElGVmX995405oLJ7xZE_pldyOPhaAOvGjmqSTJz8INQRuTqFKJMbw5W2Sf9XOsQzJO08ZbnOVVHdMCYwDZaAdptDcnKY9byRxrJYkqyHD7RzvCbystsYDM3JpPnJvgXnOLOAwba3_SDG5wina5cyrIwTXiT8NV1TShjIvCAcE1wZQoWtYh5EvO1JqsyK4eTyxez5_acssV03qEXSHNMz7RQ"/>
+</div>
+</div>
+</header>
+<main class="flex-grow p-4 md:p-8 max-w-7xl mx-auto w-full space-y-8">
+<!-- Site Weather & Context Header -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-6 bg-surface-container/40 p-6 rounded-lg backdrop-blur-md">
+<div>
+<h2 class="headline-font text-4xl font-bold tracking-tighter text-on-surface">Main Dashboard</h2>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="cloud">cloud</span>
+<span class="text-xs font-bold uppercase tracking-widest">Partly Cloudy · 24°C</span>
+</div>
+<div class="h-1 w-1 bg-outline-variant/40 rounded-full"></div>
+<div class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Active Site Log</div>
+</div>
+</div>
+<!-- Global Filters -->
+<div class="flex flex-wrap gap-3">
+<div class="bg-surface-container-lowest p-1 rounded-sm flex items-center gap-2 group cursor-pointer hover:bg-surface-container-highest transition-colors">
+<div class="bg-surface-container-high px-3 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="calendar_today">calendar_today</span>
+<span class="text-xs font-bold uppercase tracking-widest font-body">Oct 24, 2026</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant px-2" data-icon="expand_more">expand_more</span>
+</div>
+<div class="bg-surface-container-lowest p-1 rounded-sm flex items-center gap-2 group cursor-pointer hover:bg-surface-container-highest transition-colors">
+<div class="bg-surface-container-high px-3 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="location_on">location_on</span>
+<span class="text-xs font-bold uppercase tracking-widest font-body">All Sites</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant px-2" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</section>
+<!-- Summary Grid (Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Total Workers -->
+<div class="bg-surface-container p-6 rounded-sm relative overflow-hidden group">
+<div class="relative z-10">
+<p class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-4">Total Workers</p>
+<div class="flex items-baseline gap-2">
+<span class="headline-font text-6xl font-bold text-on-surface tracking-tighter">124</span>
+<span class="text-sm font-bold text-tertiary">Active</span>
+</div>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl opacity-5 text-on-surface pointer-events-none" data-icon="groups">groups</span>
+</div>
+<!-- Present Today -->
+<div class="bg-surface-container p-6 rounded-sm relative overflow-hidden group border-l-4 border-tertiary">
+<div class="relative z-10">
+<p class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-4">Present Today</p>
+<div class="flex items-baseline gap-2">
+<span class="headline-font text-6xl font-bold text-tertiary tracking-tighter">108</span>
+<div class="flex items-center text-xs font-bold text-tertiary bg-tertiary/10 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+<span>87%</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl opacity-5 text-tertiary pointer-events-none" data-icon="how_to_reg">how_to_reg</span>
+</div>
+<!-- Absent Today -->
+<div class="bg-surface-container p-6 rounded-sm relative overflow-hidden group border-l-4 border-error">
+<div class="relative z-10">
+<p class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-4">Absent Today</p>
+<div class="flex items-baseline gap-2">
+<span class="headline-font text-6xl font-bold text-error tracking-tighter">16</span>
+<span class="text-xs font-bold text-error bg-error/10 px-2 py-0.5 rounded-full">Warning</span>
+</div>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl opacity-5 text-error pointer-events-none" data-icon="person_off">person_off</span>
+</div>
+</section>
+<!-- Real-time Attendance List -->
+<section class="bg-surface-container rounded-sm overflow-hidden flex flex-col">
+<div class="p-6 flex justify-between items-center border-b border-outline-variant/10">
+<div class="flex items-center gap-3">
+<div class="w-2 h-6 bg-primary-container"></div>
+<h3 class="headline-font text-xl font-bold uppercase tracking-widest">Recent Activity</h3>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant cursor-pointer hover:text-primary transition-colors">
+<span class="text-xs font-bold uppercase tracking-widest">Live Feed</span>
+<span class="w-2 h-2 bg-error rounded-full animate-pulse"></span>
+</div>
+</div>
+<!-- Attendance Rows -->
+<div class="flex flex-col">
+<!-- Header Labels -->
+<div class="grid grid-cols-12 gap-4 px-8 py-3 bg-surface-container-lowest text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/60">
+<div class="col-span-5 lg:col-span-4">Worker Information</div>
+<div class="col-span-3 lg:col-span-2">Check-In</div>
+<div class="hidden lg:block lg:col-span-4">Project Site</div>
+<div class="col-span-4 lg:col-span-2 text-right">Status</div>
+</div>
+<!-- Row 1: John Doe -->
+<div class="grid grid-cols-12 gap-4 px-8 py-5 items-center hover:bg-surface-bright transition-colors group">
+<div class="col-span-5 lg:col-span-4 flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest rounded-sm flex items-center justify-center font-headline font-bold text-primary">JD</div>
+<div>
+<p class="font-bold text-on-surface">John Doe</p>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase">Journeyman Pipefitter</p>
+</div>
+</div>
+<div class="col-span-3 lg:col-span-2">
+<p class="text-sm font-bold font-headline">08:15 AM</p>
+<p class="text-[10px] text-tertiary font-bold uppercase">On Time</p>
+</div>
+<div class="hidden lg:block lg:col-span-4">
+<p class="text-sm font-medium text-on-surface-variant">Alpha Site - 5th Ave</p>
+</div>
+<div class="col-span-4 lg:col-span-2 flex justify-end">
+<div class="flex items-center gap-2 bg-tertiary/5 text-tertiary px-3 py-1.5 rounded-sm border border-tertiary/20">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span>
+<span class="text-[10px] font-black uppercase tracking-widest">Present</span>
+</div>
+</div>
+</div>
+<!-- Row 2: Sarah Smith -->
+<div class="grid grid-cols-12 gap-4 px-8 py-5 items-center hover:bg-surface-bright transition-colors group">
+<div class="col-span-5 lg:col-span-4 flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest rounded-sm flex items-center justify-center font-headline font-bold text-primary">SS</div>
+<div>
+<p class="font-bold text-on-surface">Sarah Smith</p>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase">Lead Architect</p>
+</div>
+</div>
+<div class="col-span-3 lg:col-span-2">
+<p class="text-sm font-bold font-headline">08:32 AM</p>
+<p class="text-[10px] text-primary-container font-bold uppercase">Late (09:30 Thr)</p>
+</div>
+<div class="hidden lg:block lg:col-span-4">
+<p class="text-sm font-medium text-on-surface-variant">Beta Project</p>
+</div>
+<div class="col-span-4 lg:col-span-2 flex justify-end">
+<div class="flex items-center gap-2 bg-primary-container/5 text-primary-container px-3 py-1.5 rounded-sm border border-primary-container/20">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+<span class="text-[10px] font-black uppercase tracking-widest">Late</span>
+</div>
+</div>
+</div>
+<!-- Row 3: Mike Ross -->
+<div class="grid grid-cols-12 gap-4 px-8 py-5 items-center hover:bg-surface-bright transition-colors group">
+<div class="col-span-5 lg:col-span-4 flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest rounded-sm flex items-center justify-center font-headline font-bold text-primary">MR</div>
+<div>
+<p class="font-bold text-on-surface">Mike Ross</p>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase">Safety Officer</p>
+</div>
+</div>
+<div class="col-span-3 lg:col-span-2">
+<p class="text-sm font-bold font-headline">09:10 AM</p>
+<p class="text-[10px] text-tertiary font-bold uppercase">Shift Start</p>
+</div>
+<div class="hidden lg:block lg:col-span-4">
+<p class="text-sm font-medium text-on-surface-variant">Alpha Site - 5th Ave</p>
+</div>
+<div class="col-span-4 lg:col-span-2 flex justify-end">
+<div class="flex items-center gap-2 bg-tertiary/5 text-tertiary px-3 py-1.5 rounded-sm border border-tertiary/20">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span>
+<span class="text-[10px] font-black uppercase tracking-widest">Present</span>
+</div>
+</div>
+</div>
+<!-- Row 4: David Brent -->
+<div class="grid grid-cols-12 gap-4 px-8 py-5 items-center hover:bg-surface-bright transition-colors group">
+<div class="col-span-5 lg:col-span-4 flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest rounded-sm flex items-center justify-center font-headline font-bold text-primary">DB</div>
+<div>
+<p class="font-bold text-on-surface">David Brent</p>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase">Site Manager</p>
+</div>
+</div>
+<div class="col-span-3 lg:col-span-2">
+<p class="text-sm font-bold font-headline">--:--</p>
+<p class="text-[10px] text-error font-bold uppercase">No Check-In</p>
+</div>
+<div class="hidden lg:block lg:col-span-4">
+<p class="text-sm font-medium text-on-surface-variant">Gamma Tower</p>
+</div>
+<div class="col-span-4 lg:col-span-2 flex justify-end">
+<div class="flex items-center gap-2 bg-error/5 text-error px-3 py-1.5 rounded-sm border border-error/20">
+<span class="material-symbols-outlined text-[16px]" data-icon="cancel">cancel</span>
+<span class="text-[10px] font-black uppercase tracking-widest">Absent</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low flex justify-center">
+<button class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant hover:text-primary transition-all">
+                    View Complete Roster
+                    <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Secondary Site Management Section -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-12">
+<div class="bg-surface-container p-6 rounded-sm">
+<h4 class="headline-font font-bold uppercase tracking-widest text-sm mb-6 text-on-surface">Compliance Alerts</h4>
+<div class="space-y-4">
+<div class="bg-surface-container-highest/50 p-4 border-l-2 border-primary-container flex justify-between items-center">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container" data-icon="warning">warning</span>
+<div>
+<p class="text-sm font-bold">Unsigned Safety Waiver</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">4 Workers · Alpha Site</p>
+</div>
+</div>
+<button class="bg-primary-container text-on-primary-container text-[10px] font-black uppercase px-4 py-2 rounded-sm active:scale-95 transition-all">Resolve</button>
+</div>
+<div class="bg-surface-container-highest/50 p-4 border-l-2 border-tertiary flex justify-between items-center">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="verified">verified</span>
+<div>
+<p class="text-sm font-bold">Credential Expiration</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">All Sites · Compliance Met</p>
+</div>
+</div>
+<button class="bg-secondary-container text-on-secondary-container text-[10px] font-black uppercase px-4 py-2 rounded-sm active:scale-95 transition-all">Audit</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-6 rounded-sm flex flex-col justify-center items-center text-center space-y-4">
+<div class="w-16 h-16 bg-surface-container-highest rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="analytics">analytics</span>
+</div>
+<div>
+<h4 class="headline-font font-bold uppercase tracking-widest text-sm text-on-surface">Weekly Efficiency Report</h4>
+<p class="text-xs text-on-surface-variant mt-2 max-w-xs">Attendance efficiency is up 12% across all industrial projects since the SiteTrack integration.</p>
+</div>
+<button class="text-xs font-bold uppercase text-primary border border-primary/20 px-6 py-2 rounded-sm hover:bg-primary/5 transition-colors">Download PDF</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe bg-[#001717] border-t-0 flat no shadows">
+<!-- Dashboard (Active) -->
+<a class="flex flex-col items-center justify-center bg-[#ff8c00] text-[#623200] rounded-sm px-4 py-1 active:translate-y-0.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-widest">Dashboard</span>
+</a>
+<!-- Workers -->
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:opacity-100 active:translate-y-0.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="engineering">engineering</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-widest">Workers</span>
+</a>
+<!-- Reports -->
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:opacity-100 active:translate-y-0.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-widest">Reports</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:opacity-100 active:translate-y-0.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-widest">Settings</span>
+</a>
+</nav>
+<!-- Floating Action Button - Only for Primary Screens -->
+<button class="fixed bottom-24 right-6 md:bottom-8 md:right-8 w-14 h-14 bg-primary-container text-on-primary-container shadow-2xl flex items-center justify-center rounded-sm active:scale-95 transition-all z-40 group">
+<span class="material-symbols-outlined text-3xl group-hover:rotate-90 transition-transform duration-300" data-icon="add">add</span>
+</button>
+</body></html>

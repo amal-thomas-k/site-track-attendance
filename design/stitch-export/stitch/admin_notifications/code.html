@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#6a3b0f",
+              "secondary-fixed": "#ffdcc3",
+              "secondary": "#fdb881",
+              "on-tertiary-container": "#004360",
+              "on-secondary": "#4d2600",
+              "surface-container-high": "#0c2f2f",
+              "tertiary": "#85cfff",
+              "on-surface": "#c6e9e9",
+              "on-error-container": "#ffdad6",
+              "outline": "#a48c7a",
+              "primary-fixed-dim": "#ffb77d",
+              "on-secondary-container": "#e9a771",
+              "surface-dim": "#001717",
+              "surface-container-lowest": "#001111",
+              "error": "#ffb4ab",
+              "inverse-on-surface": "#143535",
+              "on-tertiary": "#00344c",
+              "on-primary-fixed": "#2f1500",
+              "surface-container-low": "#002020",
+              "tertiary-container": "#00b5fc",
+              "primary-container": "#ff8c00",
+              "inverse-surface": "#c6e9e9",
+              "tertiary-fixed": "#c7e7ff",
+              "on-primary": "#4d2600",
+              "on-background": "#c6e9e9",
+              "on-tertiary-fixed": "#001e2e",
+              "surface-bright": "#1e3e3e",
+              "secondary-fixed-dim": "#fdb881",
+              "on-primary-fixed-variant": "#6e3900",
+              "surface": "#001717",
+              "inverse-primary": "#904d00",
+              "on-primary-container": "#623200",
+              "error-container": "#93000a",
+              "primary": "#ffb77d",
+              "surface-container-highest": "#193a3a",
+              "on-secondary-fixed-variant": "#6a3b0f",
+              "tertiary-fixed-dim": "#85cfff",
+              "on-tertiary-fixed-variant": "#004c6c",
+              "primary-fixed": "#ffdcc3",
+              "on-secondary-fixed": "#2f1500",
+              "outline-variant": "#564334",
+              "surface-variant": "#193a3a",
+              "background": "#001717",
+              "on-surface-variant": "#ddc1ae",
+              "surface-tint": "#ffb77d",
+              "on-error": "#690005",
+              "surface-container": "#002424"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #001717;
+        color: #c6e9e9;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #001111;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #0c2f2f;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#001717] flex items-center px-4 h-16 w-full max-w-none">
+<div class="flex items-center gap-4 w-full">
+<button class="material-symbols-outlined text-[#ff8c00] active:scale-95 duration-150 p-2 hover:bg-[#0c2f2f] transition-colors rounded-sm" data-icon="arrow_back">arrow_back</button>
+<h1 class="font-['Space_Grotesk'] uppercase tracking-wider font-bold text-[#ff8c00] text-xl">NOTIFICATIONS</h1>
+<div class="ml-auto flex gap-2">
+<span class="material-symbols-outlined text-[#c6e9e9] opacity-70" data-icon="tune">tune</span>
+</div>
+</div>
+</header>
+<main class="pt-16 pb-24 min-h-screen">
+<!-- Sticky Sub-Header Actions -->
+<div class="sticky top-16 z-40 bg-[#002424] px-4 py-3 flex justify-between items-center shadow-md">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold font-label uppercase tracking-widest text-tertiary">Live Feed</span>
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+</div>
+<div class="flex gap-4">
+<button class="text-xs font-bold font-label uppercase tracking-tighter text-on-surface hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="done_all">done_all</span>
+                    Mark as Read
+                </button>
+<button class="text-xs font-bold font-label uppercase tracking-tighter text-error hover:opacity-80 transition-opacity flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="delete_sweep">delete_sweep</span>
+                    Clear All
+                </button>
+</div>
+</div>
+<!-- Notification List -->
+<div class="px-4 py-6 space-y-4 max-w-3xl mx-auto">
+<!-- Alert Card: Critical -->
+<div class="bg-surface-container-high p-4 border-l-4 border-error relative group transition-all active:scale-[0.99]">
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-12 h-12 bg-error-container flex items-center justify-center rounded-sm">
+<span class="material-symbols-outlined text-error" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-base leading-tight truncate pr-4 text-on-surface">Late Arrival: Arjun Wallace</h3>
+<span class="text-[10px] font-label font-medium uppercase tracking-tighter opacity-50 whitespace-nowrap">10 mins ago</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-3">
+                            Checked in at 09:42 AM from Alpha Site. 12 mins past threshold. Manual override required.
+                        </p>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-sm bg-error-container text-[10px] font-bold font-label text-error tracking-widest uppercase">CRITICAL</span>
+<span class="text-[10px] font-label text-outline uppercase tracking-widest">Zone B-4</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Alert Card: Warning -->
+<div class="bg-surface-container-high p-4 border-l-4 border-primary relative group transition-all active:scale-[0.99]">
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-12 h-12 bg-secondary-container flex items-center justify-center rounded-sm">
+<span class="material-symbols-outlined text-primary" data-icon="report" style="font-variation-settings: 'FILL' 1;">report</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-base leading-tight truncate pr-4 text-on-surface">Safety Equipment Mismatch</h3>
+<span class="text-[10px] font-label font-medium uppercase tracking-tighter opacity-50 whitespace-nowrap">45 mins ago</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-3">
+                            Site 08 sensor flagged worker #4421 (Marcus T.) without active visor sync.
+                        </p>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-sm bg-secondary-container text-[10px] font-bold font-label text-primary tracking-widest uppercase">WARNING</span>
+<span class="text-[10px] font-label text-outline uppercase tracking-widest">Site 08</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Alert Card: Success/Info -->
+<div class="bg-surface-container p-4 border-l-4 border-tertiary relative group transition-all active:scale-[0.99] opacity-80">
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-12 h-12 bg-surface-container-lowest flex items-center justify-center rounded-sm">
+<span class="material-symbols-outlined text-tertiary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-base leading-tight truncate pr-4 text-on-surface">Shift Completed: Crew Delta</h3>
+<span class="text-[10px] font-label font-medium uppercase tracking-tighter opacity-50 whitespace-nowrap">2 hrs ago</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-3">
+                            8/8 members logged out. Zero reported incidents. Total project hours updated.
+                        </p>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-sm bg-surface-container-lowest text-[10px] font-bold font-label text-tertiary tracking-widest uppercase border border-tertiary/20">INFO</span>
+<span class="text-[10px] font-label text-outline uppercase tracking-widest">Harbor Project</span>
+</div>
+</div>
+</div>
+<!-- Visual Indicator for 'Read' -->
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-xs text-outline" data-icon="visibility">visibility</span>
+</div>
+</div>
+<!-- Alert Card: Critical (Asymmetric Layout Example) -->
+<div class="bg-surface-container-high p-4 border-l-4 border-error relative group transition-all active:scale-[0.99]">
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-12 h-12 bg-error-container flex items-center justify-center rounded-sm">
+<span class="material-symbols-outlined text-error" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-base leading-tight truncate pr-4 text-on-surface">Power Surge Detected</h3>
+<span class="text-[10px] font-label font-medium uppercase tracking-tighter opacity-50 whitespace-nowrap">3 hrs ago</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-3">
+                            Circuit breaker trip at Crane 02. Engineering team notified automatically.
+                        </p>
+<div class="flex flex-wrap items-center gap-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-sm bg-error-container text-[10px] font-bold font-label text-error tracking-widest uppercase">CRITICAL</span>
+<div class="flex gap-1">
+<span class="bg-surface-container-highest px-2 py-0.5 text-[9px] font-bold text-on-surface uppercase rounded-full">Voltage Out</span>
+<span class="bg-surface-container-highest px-2 py-0.5 text-[9px] font-bold text-on-surface uppercase rounded-full">Auto-Kill</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Yesterday Marker -->
+<div class="py-6 flex items-center gap-4">
+<div class="flex-1 h-px bg-outline-variant/30"></div>
+<span class="text-[10px] font-bold font-label uppercase tracking-[0.3em] text-outline">Yesterday</span>
+<div class="flex-1 h-px bg-outline-variant/30"></div>
+</div>
+<!-- Alert Card: Info -->
+<div class="bg-surface-container-low p-4 border-l-4 border-outline relative group transition-all active:scale-[0.99] opacity-60">
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-12 h-12 bg-surface-container flex items-center justify-center rounded-sm">
+<span class="material-symbols-outlined text-outline" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-base leading-tight truncate pr-4 text-on-surface">Weekly Summary Ready</h3>
+<span class="text-[10px] font-label font-medium uppercase tracking-tighter opacity-50 whitespace-nowrap">24 hrs ago</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-3">
+                            Site productivity reports for week 42 are now available in the Admin Portal.
+                        </p>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-sm bg-surface-container text-[10px] font-bold font-label text-outline tracking-widest uppercase">INFO</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky FAB (Suppressed based on rules, but included if contextual action needed - here we suppress for detail view but keep for new notification rule creation if requested, opting for suppression per prompt 'Details/Transactional') -->
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-2 bg-[#001717] z-50">
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:opacity-100 transition-opacity active:translate-y-0.5 duration-100" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="construction">construction</span>
+<span class="font-['Inter'] text-xs font-bold uppercase tracking-tighter">SITES</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:opacity-100 transition-opacity active:translate-y-0.5 duration-100" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="groups">groups</span>
+<span class="font-['Inter'] text-xs font-bold uppercase tracking-tighter">CREW</span>
+</a>
+<!-- Active Tab: ALERTS (Notifications) -->
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#ffb77d] to-[#ff8c00] text-[#623200] rounded-sm px-4 py-1 active:translate-y-0.5 duration-100" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="notifications" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-['Inter'] text-xs font-bold uppercase tracking-tighter">ALERTS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:opacity-100 transition-opacity active:translate-y-0.5 duration-100" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span class="font-['Inter'] text-xs font-bold uppercase tracking-tighter">ADMIN</span>
+</a>
+</nav>
+<!-- Content Overlays / Decorations for Industrial Feel -->
+<div class="fixed inset-0 pointer-events-none border-[12px] border-[#0c2f2f]/10 z-[60]"></div>
+</body></html>

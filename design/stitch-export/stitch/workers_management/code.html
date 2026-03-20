@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SiteTrack | Worker Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-container": "#00b5fc",
+              "surface-dim": "#001717",
+              "on-surface-variant": "#ddc1ae",
+              "on-secondary-fixed": "#2f1500",
+              "secondary-fixed": "#ffdcc3",
+              "on-primary-fixed-variant": "#6e3900",
+              "surface-container-high": "#0c2f2f",
+              "primary-fixed": "#ffdcc3",
+              "surface-container-highest": "#193a3a",
+              "primary-container": "#ff8c00",
+              "on-error-container": "#ffdad6",
+              "background": "#001717",
+              "primary": "#ffb77d",
+              "on-tertiary-fixed": "#001e2e",
+              "on-tertiary": "#00344c",
+              "surface-container-lowest": "#001111",
+              "surface": "#001717",
+              "secondary": "#fdb881",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "surface-bright": "#1e3e3e",
+              "outline-variant": "#564334",
+              "inverse-primary": "#904d00",
+              "surface-variant": "#193a3a",
+              "outline": "#a48c7a",
+              "on-secondary-fixed-variant": "#6a3b0f",
+              "on-primary-fixed": "#2f1500",
+              "secondary-fixed-dim": "#fdb881",
+              "primary-fixed-dim": "#ffb77d",
+              "on-primary": "#4d2600",
+              "on-tertiary-fixed-variant": "#004c6c",
+              "on-secondary-container": "#e9a771",
+              "on-background": "#c6e9e9",
+              "on-error": "#690005",
+              "tertiary-fixed": "#c7e7ff",
+              "secondary-container": "#6a3b0f",
+              "tertiary-fixed-dim": "#85cfff",
+              "tertiary": "#85cfff",
+              "inverse-on-surface": "#143535",
+              "surface-container-low": "#002020",
+              "on-primary-container": "#623200",
+              "surface-tint": "#ffb77d",
+              "inverse-surface": "#c6e9e9",
+              "on-tertiary-container": "#004360",
+              "on-surface": "#c6e9e9",
+              "on-secondary": "#4d2600",
+              "surface-container": "#002424"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #001717;
+            color: #c6e9e9;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-[#001717] flex justify-between items-center w-full px-6 h-16 fixed top-0 z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#ff8c00]" data-icon="precision_manufacturing">precision_manufacturing</span>
+<h1 class="font-['Space_Grotesk'] font-bold tracking-tight text-xl font-black text-[#ff8c00] uppercase tracking-wider">SiteTrack</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-['Inter'] font-bold text-[10px] uppercase tracking-widest text-[#c6e9e9] opacity-70 hover:opacity-100 transition-colors" href="#">Dashboard</a>
+<a class="font-['Inter'] font-bold text-[10px] uppercase tracking-widest text-[#ff8c00]" href="#">Workers</a>
+<a class="font-['Inter'] font-bold text-[10px] uppercase tracking-widest text-[#c6e9e9] opacity-70 hover:opacity-100 transition-colors" href="#">Reports</a>
+<a class="font-['Inter'] font-bold text-[10px] uppercase tracking-widest text-[#c6e9e9] opacity-70 hover:opacity-100 transition-colors" href="#">Settings</a>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="Admin Profile Photo" class="w-full h-full object-cover" data-alt="Professional profile headshot of a site manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZRY8O1DQmSvJ2PMSwKO0csjISlwrFxZRebUVYRwCxEFY9Qta040ec49oDBG93iQqDXzq6DTqXpS5G4RrT3N6RySAJJySrjQt2UXYjjCJrq_YJ7nHkIyNA11578Bve3G3-kypWg0r5slCwuMfLdwu4OxzVbXiPa2nSXhT5NK_vy-MFW-jHb48EnXV1gg2bL43KwwxKBszJeyZvhnX4eTo0VNzt_N4tV6nJxWZkMkSbocOZJMit9o5vX-H5xHELOUaCntZ0u5GBjw"/>
+</div>
+</div>
+</header>
+<main class="pt-24 px-4 md:px-8 max-w-7xl mx-auto">
+<!-- Dashboard Header & Search -->
+<div class="mb-8">
+<h2 class="font-headline text-4xl font-bold tracking-tighter mb-6 text-on-surface">Worker Directory</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="md:col-span-2 relative">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest border-none py-4 pl-12 pr-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container rounded-lg transition-all" placeholder="Search by name, role, or site ID..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-surface-container-high hover:bg-surface-bright text-on-surface font-bold py-4 px-6 flex items-center justify-center gap-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+<span class="font-label text-xs uppercase tracking-widest">Filters</span>
+</button>
+<button class="flex-1 bg-primary-container text-on-primary-container font-bold py-4 px-6 flex items-center justify-center gap-2 rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm" data-icon="person_add">person_add</span>
+<span class="font-label text-xs uppercase tracking-widest">Add New</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Worker Bento Grid / List -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Worker Card 1 -->
+<div class="bg-surface-container-high rounded-lg p-6 flex flex-col justify-between group hover:bg-surface-bright transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="flex gap-4">
+<div class="w-14 h-14 bg-surface-container-lowest rounded-md flex items-center justify-center overflow-hidden">
+<img alt="Worker Photo" class="w-full h-full object-cover" data-alt="Portrait of a construction worker in safety gear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJl3O6fFBrcwoQLvBhbDnpSd7sTfYcQjeT6yen22ugk2L-SIAkP5n5HCTxEnaoG_ElKEuTF1Nq6ZbsFjqZ2wPhm5W25wXFCyJesvLa7PQYAVPjxVuY6MRCUx2rrI3K1mN3eUWj50EdRTpo7S6kXUM_zLDSrq1ifQ0Oh2CSyVo_jpvT5M-sNk9yGAq_QBn4MBwBV32rpSF-_KtQhQCMHYD9bKiDrDL1wyCkx4IJk1PEoxZtVwhD8rsLS8TPExYB_auWNJNStcU3qQ"/>
+</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface leading-tight">Arjun Wallace</h3>
+<p class="font-label text-[10px] uppercase tracking-widest text-primary font-bold">Lead Architect</p>
+</div>
+</div>
+<span class="px-2 py-1 rounded-sm bg-tertiary-container/20 text-tertiary text-[10px] font-bold uppercase tracking-widest border border-tertiary/20">Active</span>
+</div>
+<div class="space-y-3 mb-8">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="location_on">location_on</span>
+<span class="text-sm font-medium">Alpha Site - Central Block</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="text-sm font-medium">Shift: 06:00 - 14:00</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-surface-container-lowest text-on-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+                        History
+                    </button>
+<button class="bg-surface-container-lowest text-on-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+                        Profile
+                    </button>
+</div>
+</div>
+<!-- Worker Card 2 -->
+<div class="bg-surface-container-high rounded-lg p-6 flex flex-col justify-between group hover:bg-surface-bright transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="flex gap-4">
+<div class="w-14 h-14 bg-surface-container-lowest rounded-md flex items-center justify-center overflow-hidden">
+<img alt="Worker Photo" class="w-full h-full object-cover" data-alt="Portrait of a female safety officer on site" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3v_0FWpGtVPf9rF_cZVYZs1H6VE5TIT4tlspBYgTonYRgysJJ5gAd5Hsy3x_t4l8H50bfaJsJN9b_F8U_A8995213s4Fq1YxthVj3vmNCaqg-UblMcNOpEDem-XrY-WY3TqKx4dMBjKe9IOhRVZLiLgDnxJg7kXgh2oPneuwimXYBUCIwShRxVJFA8W4-d0wuqCFC5G7DNBf-sZOIoDIPxVua9whrOk6MQ71-uGfAf03BdbVrHavjFUzcFHV6TQrpfESmi8PG2A"/>
+</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface leading-tight">Elena Martinez</h3>
+<p class="font-label text-[10px] uppercase tracking-widest text-primary font-bold">Safety Officer</p>
+</div>
+</div>
+<span class="px-2 py-1 rounded-sm bg-error-container/20 text-error text-[10px] font-bold uppercase tracking-widest border border-error/20">On Leave</span>
+</div>
+<div class="space-y-3 mb-8">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="location_on">location_on</span>
+<span class="text-sm font-medium">Zone B - Perimeter</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="calendar_month">calendar_month</span>
+<span class="text-sm font-medium">Returning: Oct 24</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-surface-container-lowest text-on-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+                        History
+                    </button>
+<button class="bg-surface-container-lowest text-on-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+                        Profile
+                    </button>
+</div>
+</div>
+<!-- Worker Card 3 -->
+<div class="bg-surface-container-high rounded-lg p-6 flex flex-col justify-between group hover:bg-surface-bright transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="flex gap-4">
+<div class="w-14 h-14 bg-surface-container-lowest rounded-md flex items-center justify-center overflow-hidden">
+<img alt="Worker Photo" class="w-full h-full object-cover" data-alt="Portrait of a specialized pipefitter at work" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQCCFGM-hw7NMvk7mIhGgyHjPf4xogUj3lq5NmUsctoWQB7oe-EEUGrPPOlHGWefcrI8Yl-nuPYixc2N-R0QKtrrhbBvGyG7QNBlT1lmt18OJUNLFfbe_qN17KVj92AWC3DpliMf-dC64_dRmXNJZv0sNGR837Tij8a_leQHaeeAp2MYogCw4ytVFOZ4KOkx0Pkin2vUFDK9vuJFhZIowjpXmIQwnW1De6wLYooAuxORsmiig4_nOQLMRvDbK9keiBYWxMAcysyg"/>
+</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface leading-tight">Sam Kowalski</h3>
+<p class="font-label text-[10px] uppercase tracking-widest text-primary font-bold">Pipefitter</p>
+</div>
+</div>
+<span class="px-2 py-1 rounded-sm bg-tertiary-container/20 text-tertiary text-[10px] font-bold uppercase tracking-widest border border-tertiary/20">Active</span>
+</div>
+<div class="space-y-3 mb-8">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="location_on">location_on</span>
+<span class="text-sm font-medium">Alpha Site - Basement L2</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="engineering">engineering</span>
+<span class="text-sm font-medium">Equip: Welder-X7</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-surface-container-lowest text-on-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+                        History
+                    </button>
+<button class="bg-surface-container-lowest text-on-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+                        Profile
+                    </button>
+</div>
+</div>
+<!-- Worker Card 4 -->
+<div class="bg-surface-container-high rounded-lg p-6 flex flex-col justify-between group hover:bg-surface-bright transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="flex gap-4">
+<div class="w-14 h-14 bg-surface-container-lowest rounded-md flex items-center justify-center overflow-hidden">
+<img alt="Worker Photo" class="w-full h-full object-cover" data-alt="Senior site foreman portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO6mxNOvlsklQxF00cQ9uhNeD2c78pIdco5p47mD1Dp72tUKa-dpP6lc_XUNti7HxiX9G9RyCb54LW9B-2XokG6PiIreP-TjFekueimjTrLVW-StHaqHKQ6U0tNxJmDHxw_aB0HDG4byYTTjBcDvYz576qF7eloZ9mkvfpcSEhLlxA9lWZ4Ur8NKZs2lYCmwO5-5Klu5y-q_DBxM0RU7Obmcaef7WJ2gHaF4f8Q9P-iuPncZR3L4wQl8eo_ERzk7q9Gz0eTpdPIA"/>
+</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface leading-tight">Jameson Dale</h3>
+<p class="font-label text-[10px] uppercase tracking-widest text-primary font-bold">Foreman</p>
+</div>
+</div>
+<span class="px-2 py-1 rounded-sm bg-tertiary-container/20 text-tertiary text-[10px] font-bold uppercase tracking-widest border border-tertiary/20">Active</span>
+</div>
+<div class="space-y-3 mb-8">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="location_on">location_on</span>
+<span class="text-sm font-medium">Zone C - North Gate</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="group">group</span>
+<span class="text-sm font-medium">Crew: 12 Members</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-surface-container-lowest text-on-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+                        History
+                    </button>
+<button class="bg-surface-container-lowest text-on-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+                        Profile
+                    </button>
+</div>
+</div>
+<!-- Worker Card 5 -->
+<div class="bg-surface-container-high rounded-lg p-6 flex flex-col justify-between group hover:bg-surface-bright transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="flex gap-4">
+<div class="w-14 h-14 bg-surface-container-lowest rounded-md flex items-center justify-center overflow-hidden">
+<img alt="Worker Photo" class="w-full h-full object-cover" data-alt="Portrait of an apprentice electrician" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfOorq2yp6YfcfIDU4XWzz6zo5i9HTGxE9fDpr_bgI5G8BINfxMQ6odd-hJQqJCjxORuPsGYcho1ztiNkupUbIWAe6nWVMg0VLm19DjdYLZ1qSvXyfRygeN8WdHuJuz8prEAG1rn9jJSFzbO1LUnkIgvTPi6S5txT7KRGky7fp7dwIvCppjbTQdUozsXyxOKw6nFf32LqrfvqGT-sEYU6cC78JBqUnBog0DXJRyZlqP3rU6z1V-2ErOkGU6CO2PpkwQwCdxy52Lw"/>
+</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface leading-tight">Lara Young</h3>
+<p class="font-label text-[10px] uppercase tracking-widest text-primary font-bold">Electrician</p>
+</div>
+</div>
+<span class="px-2 py-1 rounded-sm bg-tertiary-container/20 text-tertiary text-[10px] font-bold uppercase tracking-widest border border-tertiary/20">Active</span>
+</div>
+<div class="space-y-3 mb-8">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="location_on">location_on</span>
+<span class="text-sm font-medium">Zone B - Grid 4</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="bolt">bolt</span>
+<span class="text-sm font-medium">Phase: High Voltage</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-surface-container-lowest text-on-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+                        History
+                    </button>
+<button class="bg-surface-container-lowest text-on-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+                        Profile
+                    </button>
+</div>
+</div>
+<!-- Worker Card 6 -->
+<div class="bg-surface-container-high rounded-lg p-6 flex flex-col justify-between group hover:bg-surface-bright transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="flex gap-4">
+<div class="w-14 h-14 bg-surface-container-lowest rounded-md flex items-center justify-center overflow-hidden">
+<img alt="Worker Photo" class="w-full h-full object-cover" data-alt="Construction site logistic coordinator" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD6ef7tlkdIZWiqmExNyVDlYSbrBMMaA7CSQ7xDeJA3KYLOXMrk6YqP2hmkg9wXzAi9ezla5qbc8IzDyYJ4PPhZJ47GUGkV7j5BBGbAdc0PWAwa7lAVUQOoLmUsXFHWkOCiv1QdSX40I0Z8_QkRzZG0Hoe3sVmQ8VT2GhAqIuXYmOXbVJ8rK5PAMbDq5UjpmC6VBzF1j42nZE5eQ9ObkIZ-g0iAAUax-HsyK5sK4F8bN5fY_woSbo3h4A8Dbb1WN5fEAJoQ274fg"/>
+</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface leading-tight">Marcus Bell</h3>
+<p class="font-label text-[10px] uppercase tracking-widest text-primary font-bold">Logistic Coord</p>
+</div>
+</div>
+<span class="px-2 py-1 rounded-sm bg-error-container/20 text-error text-[10px] font-bold uppercase tracking-widest border border-error/20">Off-Duty</span>
+</div>
+<div class="space-y-3 mb-8">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="location_on">location_on</span>
+<span class="text-sm font-medium">Supply Yard A</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="inventory_2">inventory_2</span>
+<span class="text-sm font-medium">Inventory Focus</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-surface-container-lowest text-on-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+                        History
+                    </button>
+<button class="bg-surface-container-lowest text-on-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+                        Profile
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe bg-[#001717]">
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:opacity-100 active:translate-y-0.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#ff8c00] text-[#623200] rounded-sm px-4 py-1 active:translate-y-0.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="engineering">engineering</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-widest">Workers</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:opacity-100 active:translate-y-0.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-widest">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:opacity-100 active:translate-y-0.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-widest">Settings</span>
+</a>
+</nav>
+<!-- Desktop Floating Status Bar (Custom Component) -->
+<div class="hidden lg:flex fixed bottom-8 right-8 bg-surface-container-highest/80 backdrop-blur-md px-6 py-4 rounded-lg items-center gap-8 shadow-2xl border border-primary/10">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-tertiary"></div>
+<div>
+<p class="text-[10px] uppercase font-bold text-outline">On Site Now</p>
+<p class="text-xl font-headline font-black text-on-surface">142</p>
+</div>
+</div>
+<div class="w-px h-8 bg-outline/20"></div>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<div>
+<p class="text-[10px] uppercase font-bold text-outline">Absences</p>
+<p class="text-xl font-headline font-black text-on-surface">08</p>
+</div>
+</div>
+<div class="w-px h-8 bg-outline/20"></div>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-primary-container"></div>
+<div>
+<p class="text-[10px] uppercase font-bold text-outline">Safety Rate</p>
+<p class="text-xl font-headline font-black text-on-surface">99%</p>
+</div>
+</div>
+</div>
+</body></html>

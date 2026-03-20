@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SITETRACK - Attendance History</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=Inter:wght@300..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-container": "#6a3b0f",
+                        "on-secondary-container": "#e9a771",
+                        "on-primary-container": "#623200",
+                        "on-primary-fixed-variant": "#6e3900",
+                        "secondary-fixed-dim": "#fdb881",
+                        "tertiary-fixed-dim": "#85cfff",
+                        "on-tertiary-container": "#004360",
+                        "surface-variant": "#193a3a",
+                        "surface-tint": "#ffb77d",
+                        "on-secondary-fixed-variant": "#6a3b0f",
+                        "surface-container-lowest": "#001111",
+                        "primary-container": "#ff8c00",
+                        "error-container": "#93000a",
+                        "surface-container": "#002424",
+                        "secondary": "#fdb881",
+                        "surface-bright": "#1e3e3e",
+                        "tertiary-container": "#00b5fc",
+                        "outline-variant": "#564334",
+                        "inverse-primary": "#904d00",
+                        "on-background": "#c6e9e9",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#ffdcc3",
+                        "secondary-fixed": "#ffdcc3",
+                        "primary-fixed-dim": "#ffb77d",
+                        "on-secondary-fixed": "#2f1500",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#c7e7ff",
+                        "surface-container-highest": "#193a3a",
+                        "on-primary-fixed": "#2f1500",
+                        "on-secondary": "#4d2600",
+                        "inverse-surface": "#c6e9e9",
+                        "surface": "#001717",
+                        "background": "#001717",
+                        "surface-container-low": "#002020",
+                        "on-primary": "#4d2600",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "on-tertiary": "#00344c",
+                        "on-surface": "#c6e9e9",
+                        "surface-dim": "#001717",
+                        "on-tertiary-fixed": "#001e2e",
+                        "tertiary": "#85cfff",
+                        "on-surface-variant": "#ddc1ae",
+                        "primary": "#ffb77d",
+                        "outline": "#a48c7a",
+                        "surface-container-high": "#0c2f2f",
+                        "inverse-on-surface": "#143535"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #001717;
+            color: #c6e9e9;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#001717] flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-[#193a3a] transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[#ff8c00]">arrow_back</span>
+</button>
+<h1 class="font-['Space_Grotesk'] font-bold tracking-tight uppercase text-xl text-[#ff8c00] tracking-widest">SITETRACK</h1>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant/20 flex items-center justify-center overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Worker profile headshot in safety gear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCou4eXQsskQ9WFOTAlUaQh9l9sT36pytwHAOv0B7DUeADXluoTBFgJNTdI0ZQnJKJMYgMUWjTIXaAT1en3yCPxDAiUAdvEz_j8mBYmmA1vzOEnRTxbHD4MVzRzWhhuxv_7tIHy5qY767MbmIXXA038j7b2AaddqYGCU79QHtH14DYN7AFVShoOrHMcJ-n5WfO8llRGvKJUG5dOQFN_HiwR_HJOtzSXNg4MPGQDiH--HoKrEd-Uawsod2GYe9tXDAfSnRbGjamwRw"/>
+</div>
+</div>
+</header>
+<main class="pt-20 px-4 max-w-2xl mx-auto">
+<!-- Dashboard Summary (Bento Style) -->
+<section class="grid grid-cols-2 gap-4 mb-8">
+<div class="col-span-2 bg-surface-container-high p-6 rounded-lg border-l-4 border-primary-container">
+<p class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Current Cycle</p>
+<h2 class="font-headline text-3xl font-bold text-on-surface">OCTOBER 2026</h2>
+<div class="flex justify-between items-end mt-4">
+<div>
+<span class="text-4xl font-headline font-black text-primary">22</span>
+<span class="text-xs font-label uppercase text-on-surface-variant ml-1">Days Present</span>
+</div>
+<div class="text-right">
+<span class="text-xl font-headline font-bold text-tertiary">98%</span>
+<p class="text-[10px] font-label uppercase text-on-surface-variant">Reliability Score</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Attendance List Header -->
+<div class="flex items-center justify-between mb-6 px-2">
+<h3 class="font-headline text-lg font-bold tracking-tight uppercase border-b-2 border-primary-container pb-1">Attendance History</h3>
+<span class="material-symbols-outlined text-on-surface-variant">filter_list</span>
+</div>
+<!-- History Entries -->
+<div class="space-y-3">
+<!-- Entry 1 -->
+<div class="bg-surface-container p-4 rounded-lg flex items-center justify-between hover:bg-surface-bright transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-lowest rounded-lg flex flex-col items-center justify-center border border-outline-variant/10">
+<span class="text-[10px] font-label font-bold uppercase text-on-surface-variant">Oct</span>
+<span class="text-lg font-headline font-bold text-primary">24</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-on-surface">08:15 AM</span>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-tertiary/20 text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Present
+                            </span>
+</div>
+<div class="flex items-center gap-1 mt-1 text-on-surface-variant text-xs">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="font-medium">Zone B - Sector 4</span>
+</div>
+</div>
+</div>
+<button class="p-2 rounded hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[#ff8c00]">map</span>
+</button>
+</div>
+<!-- Entry 2 -->
+<div class="bg-surface-container-low p-4 rounded-lg flex items-center justify-between hover:bg-surface-bright transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-lowest rounded-lg flex flex-col items-center justify-center border border-outline-variant/10">
+<span class="text-[10px] font-label font-bold uppercase text-on-surface-variant">Oct</span>
+<span class="text-lg font-headline font-bold text-primary">23</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-on-surface">09:42 AM</span>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-secondary-container text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">schedule</span>
+                                Late
+                            </span>
+</div>
+<div class="flex items-center gap-1 mt-1 text-on-surface-variant text-xs">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="font-medium">Main Gate Entry</span>
+</div>
+</div>
+</div>
+<button class="p-2 rounded hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[#ff8c00]">map</span>
+</button>
+</div>
+<!-- Entry 3 -->
+<div class="bg-surface-container p-4 rounded-lg flex items-center justify-between hover:bg-surface-bright transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-lowest rounded-lg flex flex-col items-center justify-center border border-outline-variant/10">
+<span class="text-[10px] font-label font-bold uppercase text-on-surface-variant">Oct</span>
+<span class="text-lg font-headline font-bold text-primary">22</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-on-surface">08:02 AM</span>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-tertiary/20 text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Present
+                            </span>
+</div>
+<div class="flex items-center gap-1 mt-1 text-on-surface-variant text-xs">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="font-medium">Zone A - Staging</span>
+</div>
+</div>
+</div>
+<button class="p-2 rounded hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[#ff8c00]">map</span>
+</button>
+</div>
+<!-- Entry 4 -->
+<div class="bg-surface-container-low p-4 rounded-lg flex items-center justify-between hover:bg-surface-bright transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-lowest rounded-lg flex flex-col items-center justify-center border border-outline-variant/10">
+<span class="text-[10px] font-label font-bold uppercase text-on-surface-variant">Oct</span>
+<span class="text-lg font-headline font-bold text-primary">21</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-on-surface">08:10 AM</span>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-tertiary/20 text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Present
+                            </span>
+</div>
+<div class="flex items-center gap-1 mt-1 text-on-surface-variant text-xs">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="font-medium">Zone B - Sector 4</span>
+</div>
+</div>
+</div>
+<button class="p-2 rounded hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[#ff8c00]">map</span>
+</button>
+</div>
+<!-- Entry 5 (Error/Absent Example) -->
+<div class="bg-surface-container p-4 rounded-lg flex items-center justify-between hover:bg-surface-bright transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-lowest rounded-lg flex flex-col items-center justify-center border border-outline-variant/10">
+<span class="text-[10px] font-label font-bold uppercase text-on-surface-variant">Oct</span>
+<span class="text-lg font-headline font-bold text-primary">20</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-on-surface">-- : --</span>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-error-container text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">error</span>
+                                Absent
+                            </span>
+</div>
+<div class="flex items-center gap-1 mt-1 text-on-surface-variant text-xs">
+<span class="material-symbols-outlined text-sm">info</span>
+<span class="font-medium italic">No Site Activity Recorded</span>
+</div>
+</div>
+</div>
+<button class="p-2 rounded hover:bg-surface-container-highest transition-colors opacity-30 cursor-not-allowed">
+<span class="material-symbols-outlined text-[#ff8c00]">map</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-4 pb-safe bg-[#002020] border-t border-[#564334]/15 z-50">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:text-[#ffb77d] active:translate-y-0.5 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-wider">Home</span>
+</a>
+<!-- History (Active) -->
+<a class="flex flex-col items-center justify-center bg-[#ff8c00] text-[#623200] rounded-sm px-4 py-1 active:translate-y-0.5 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-wider">History</span>
+</a>
+<!-- Dashboard -->
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:text-[#ffb77d] active:translate-y-0.5 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-wider">Dashboard</span>
+</a>
+<!-- Analytics -->
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:text-[#ffb77d] active:translate-y-0.5 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1">analytics</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-wider">Analytics</span>
+</a>
+</nav>
+</body></html>

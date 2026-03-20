@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SITETRACK - Worker Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-container": "#6a3b0f",
+                        "on-secondary-container": "#e9a771",
+                        "on-primary-container": "#623200",
+                        "on-primary-fixed-variant": "#6e3900",
+                        "secondary-fixed-dim": "#fdb881",
+                        "tertiary-fixed-dim": "#85cfff",
+                        "on-tertiary-container": "#004360",
+                        "surface-variant": "#193a3a",
+                        "surface-tint": "#ffb77d",
+                        "on-secondary-fixed-variant": "#6a3b0f",
+                        "surface-container-lowest": "#001111",
+                        "primary-container": "#ff8c00",
+                        "error-container": "#93000a",
+                        "surface-container": "#002424",
+                        "secondary": "#fdb881",
+                        "surface-bright": "#1e3e3e",
+                        "tertiary-container": "#00b5fc",
+                        "outline-variant": "#564334",
+                        "inverse-primary": "#904d00",
+                        "on-background": "#c6e9e9",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#ffdcc3",
+                        "secondary-fixed": "#ffdcc3",
+                        "primary-fixed-dim": "#ffb77d",
+                        "on-secondary-fixed": "#2f1500",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#c7e7ff",
+                        "surface-container-highest": "#193a3a",
+                        "on-primary-fixed": "#2f1500",
+                        "on-secondary": "#4d2600",
+                        "inverse-surface": "#c6e9e9",
+                        "surface": "#001717",
+                        "background": "#001717",
+                        "surface-container-low": "#002020",
+                        "on-primary": "#4d2600",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "on-tertiary": "#00344c",
+                        "on-surface": "#c6e9e9",
+                        "surface-dim": "#001717",
+                        "on-tertiary-fixed": "#001e2e",
+                        "tertiary": "#85cfff",
+                        "on-surface-variant": "#ddc1ae",
+                        "primary": "#ffb77d",
+                        "outline": "#a48c7a",
+                        "surface-container-high": "#0c2f2f",
+                        "inverse-on-surface": "#143535"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#001717] dark:bg-[#001717] flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#ff8c00]" data-icon="construction">construction</span>
+<h1 class="font-['Space_Grotesk'] font-bold tracking-tight uppercase text-xl font-black text-[#ff8c00] tracking-widest">SITETRACK</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-6 mr-6">
+<a class="font-['Inter'] font-bold text-[10px] uppercase tracking-wider text-[#ff8c00]" href="#">Home</a>
+<a class="font-['Inter'] font-bold text-[10px] uppercase tracking-wider text-[#c6e9e9] opacity-70 hover:text-[#ffb77d] transition-colors" href="#">History</a>
+<a class="font-['Inter'] font-bold text-[10px] uppercase tracking-wider text-[#c6e9e9] opacity-70 hover:text-[#ffb77d] transition-colors" href="#">Dashboard</a>
+<a class="font-['Inter'] font-bold text-[10px] uppercase tracking-wider text-[#c6e9e9] opacity-70 hover:text-[#ffb77d] transition-colors" href="#">Analytics</a>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-right hidden sm:block">
+<p class="text-xs font-bold font-headline uppercase tracking-wider">John Doe</p>
+<p class="text-[10px] text-primary opacity-80">Foreman Rank A</p>
+</span>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high overflow-hidden border border-outline-variant/15">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Portrait of a construction worker in a safety helmet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNZAo8CiyuzWmtxLQHGkM3lCG1NMpsiu5rfsBvZ2foUaXNFHcYQXJY_f2Qt9XNC3rDxLcxuYcWZsgJ_M7ukSl6RHvOXmurEf8NXnWZVCOwahHUOz6Ww3yioUkRtBxgncjp0SFr8URl4u-IDOPtCK1C981Jlx9QNXCwBhPPUUQ_odRuBD9bSbEFECm1hkWXeBdtKvSm0n2hIPKlP2mbaLKWHPAjw65XeuyE3l1fgSh8mmhJl3g-Nw8fdQTNL2M1IcbUwLpGqmNorA"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-4xl mx-auto flex flex-col gap-8">
+<!-- Site Header Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em] font-label">Active Project Site</span>
+</div>
+<h2 class="text-3xl font-headline font-bold text-on-surface leading-tight">Alpha Site - 5th Ave</h2>
+</div>
+<div class="bg-surface-container-high px-4 py-3 rounded-lg flex items-center gap-3 self-start md:self-auto">
+<div class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-tertiary"></span>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-wider opacity-60">GPS Status</p>
+<p class="text-sm font-semibold text-tertiary">Location Locked</p>
+</div>
+</div>
+</section>
+<!-- Attendance Status/Success Message (Asymmetric Card) -->
+<section class="relative overflow-hidden bg-surface-container rounded-xl p-1">
+<div class="bg-surface-container-high p-6 rounded-lg border-l-4 border-primary-container">
+<div class="flex items-start gap-4">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="task_alt">task_alt</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-headline font-bold text-on-surface">Good morning, John!</h3>
+<p class="text-on-surface-variant text-sm">You checked in at <span class="text-primary font-bold">08:32 AM</span> today. Stay safe out there.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Action (Center Component) -->
+<section class="flex-grow flex items-center justify-center py-12">
+<div class="relative group">
+<!-- Decorative rings mimicking industrial gear/safety tech -->
+<div class="absolute -inset-8 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>
+<button class="relative w-64 h-64 rounded-full bg-gradient-to-br from-[#ffb77d] to-[#ff8c00] flex flex-col items-center justify-center gap-3 shadow-[0_0_50px_rgba(255,140,0,0.3)] active:scale-95 transition-all duration-150 border-8 border-surface group">
+<span class="material-symbols-outlined text-6xl text-on-primary-container" data-icon="fingerprint" style="font-variation-settings: 'FILL' 1;">fingerprint</span>
+<span class="font-headline font-black text-xl tracking-tighter text-on-primary-container uppercase">Mark Attendance</span>
+<div class="absolute -bottom-4 bg-surface-container-highest px-4 py-1 rounded-full border border-outline-variant/20">
+<p class="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">Hold to Verify</p>
+</div>
+</button>
+</div>
+</section>
+<!-- Weather and Conditions (Secondary Bento Card) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container p-5 rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant" data-icon="partly_cloudy_day">partly_cloudy_day</span>
+<div>
+<p class="text-2xl font-headline font-bold">24°C</p>
+<p class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Clear Skies</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-tertiary uppercase">Wind: 12km/h</p>
+<p class="text-[10px] text-on-surface-variant">Perfect for concrete</p>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant" data-icon="history">history</span>
+<div>
+<p class="text-2xl font-headline font-bold">42h</p>
+<p class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">This Week</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-primary uppercase">8h Overtime</p>
+<p class="text-[10px] text-on-surface-variant">Shift completion: 94%</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-4 pb-safe bg-[#002020] z-50 border-t border-[#564334]/15">
+<a class="flex flex-col items-center justify-center bg-[#ff8c00] text-[#623200] rounded-sm px-4 py-1 active:translate-y-0.5 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-wider">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:text-[#ffb77d] active:translate-y-0.5 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-wider">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:text-[#ffb77d] active:translate-y-0.5 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#c6e9e9] opacity-70 px-4 py-1 hover:text-[#ffb77d] active:translate-y-0.5 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Inter'] font-bold text-[10px] uppercase tracking-wider">Analytics</span>
+</a>
+</nav>
+</body></html>
