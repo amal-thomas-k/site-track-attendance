@@ -14,8 +14,6 @@ services:
         EXPO_PUBLIC_FIREBASE_EMULATOR_HOST: ${EXPO_PUBLIC_FIREBASE_EMULATOR_HOST:-localhost}
         EXPO_PUBLIC_FIREBASE_AUTH_EMULATOR_PORT: ${EXPO_PUBLIC_FIREBASE_AUTH_EMULATOR_PORT:-9099}
         EXPO_PUBLIC_FIREBASE_FIRESTORE_EMULATOR_PORT: ${EXPO_PUBLIC_FIREBASE_FIRESTORE_EMULATOR_PORT:-8085}
-    depends_on:
-      - firebase-emulators
     ports:
       - "8080:80"
     restart: unless-stopped
@@ -29,6 +27,8 @@ services:
       - "5001:5001"
       - "8085:8085"
       - "9099:9099"
+    profiles:
+      - local-emulators
     restart: unless-stopped
     volumes:
       - firebase-emulator-data:/app/.firebase-data

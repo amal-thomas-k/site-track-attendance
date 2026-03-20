@@ -4,6 +4,8 @@ SiteTrack Attendance is a cross-platform mobile app for civil construction compa
 
 Docker support is included for teams that need a reproducible deployment handoff. Because this is an Expo mobile-first project, Docker is used here for the web export and Firebase emulator stack, not for generating Android or iOS binaries.
 
+The repository now also includes a dedicated hosted React web app in `web/`, generated from the Stitch screens and wired for Firebase-backed deployment.
+
 ## What It Includes
 
 - Worker login using Firebase Authentication
@@ -53,6 +55,9 @@ functions/
 
 design/
   stitch-export/   Stitch design export, screenshots, HTML mockups, and analysis
+
+web/
+  src/             Hosted React application built from the Stitch screens
 ```
 
 ## Design References
@@ -67,6 +72,23 @@ This is stored as a reference/design artifact set:
 - a local analysis README explaining how to use it
 
 These files are not part of the running Expo app, but they are useful for UI redesign work and stakeholder review.
+
+## Hosted React App
+
+The `web/` directory contains a standalone React + Vite application that turns the Stitch screens into a routed, interactive web experience.
+
+It includes:
+
+- Firebase-aware login using the same `EXPO_PUBLIC_*` environment variable names from `.env.example`
+- Worker check-in with browser geolocation
+- Worker history
+- Admin dashboard
+- Worker directory
+- Analytics charts
+- Reports export
+- Notifications center
+- Settings page
+- Demo mode fallback for review when Firebase is not configured
 
 ## Worker Experience
 
@@ -159,9 +181,9 @@ npm run start
 
 ### What It Covers
 
-- Builds the Expo web export in a dedicated Node container
+- Builds the hosted React app in `web/` in a dedicated Node container
 - Serves the built app through Nginx
-- Runs Firebase Auth, Firestore, Functions, and the Emulator UI in a separate container
+- Optionally runs Firebase Auth, Firestore, Functions, and the Emulator UI in a separate container
 - Persists emulator state in a Docker volume
 - Supports emulator-aware app builds using environment variables
 
@@ -186,8 +208,16 @@ EXPO_PUBLIC_FIREBASE_FIRESTORE_EMULATOR_PORT=8085
 
 ### Run With Docker Compose
 
+Web app only, using real Firebase:
+
 ```bash
 docker compose up --build
+```
+
+Web app plus Firebase emulators:
+
+```bash
+docker compose --profile local-emulators up --build
 ```
 
 ### Ports
@@ -203,6 +233,24 @@ docker compose up --build
 - This compose stack is intended for cloud handoff, QA review, reproducible local setup, and backend integration testing.
 - Native iOS and Android releases should still be built with Expo/EAS or platform-native CI.
 - If your cloud team deploys the web container outside local Docker, update the emulator host or point the app at real Firebase services instead.
+
+## Hosted Web App Setup
+
+The hosted React app reuses the same Firebase env names from `.env.example`. For local standalone development:
+
+```bash
+cd web
+cp .env.example .env
+npm install
+npm run dev
+```
+
+Production build:
+
+```bash
+cd web
+npm run build
+```
 
 ## Firebase Setup Checklist
 
