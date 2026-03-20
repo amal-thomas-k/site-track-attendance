@@ -1,7 +1,7 @@
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { FirebaseError } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { connectAuthEmulator, getAuth } from 'firebase/auth';
+import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
@@ -23,6 +23,34 @@ const app = isFirebaseConfigured
 export const firebaseApp = app;
 export const auth = app ? getAuth(app) : null;
 export const db = app ? getFirestore(app) : null;
+
+const useFirebaseEmulators = process.env.EXPO_PUBLIC_USE_FIREBASE_EMULATORS === 'true';
+const firebaseEmulatorHost = process.env.EXPO_PUBLIC_FIREBASE_EMULATOR_HOST || 'localhost';
+const firebaseAuthEmulatorPort = Number(
+  process.env.EXPO_PUBLIC_FIREBASE_AUTH_EMULATOR_PORT || 9099,
+);
+const firebaseFirestoreEmulatorPort = Number(
+  process.env.EXPO_PUBLIC_FIREBASE_FIRESTORE_EMULATOR_PORT || 8085,
+);
+
+if (useFirebaseEmulators && auth && db) {
+  const emulatorFlags = globalThis as typeof globalThis & {
+    __siteTrackAuthEmulatorConnected?: boolean;
+    __siteTrackFirestoreEmulatorConnected?: boolean;
+  };
+
+  if (!emulatorFlags.__siteTrackAuthEmulatorConnected) {
+    connectAuthEmulator(auth, `http://${firebaseEmulatorHost}:${firebaseAuthEmulatorPort}`, {
+      disableWarnings: true,
+    });
+    emulatorFlags.__siteTrackAuthEmulatorConnected = true;
+  }
+
+  if (!emulatorFlags.__siteTrackFirestoreEmulatorConnected) {
+    connectFirestoreEmulator(db, firebaseEmulatorHost, firebaseFirestoreEmulatorPort);
+    emulatorFlags.__siteTrackFirestoreEmulatorConnected = true;
+  }
+}
 
 export function getFriendlyFirebaseError(error: unknown) {
   if (!(error instanceof FirebaseError)) {

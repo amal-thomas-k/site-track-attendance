@@ -2,6 +2,8 @@
 
 SiteTrack Attendance is a cross-platform mobile app for civil construction companies to track worker attendance across multiple sites in real time. Workers can check in once per day with GPS-backed timestamps, and admins can monitor workforce presence, review attendance analytics, and receive instant notifications when someone arrives on site.
 
+Docker support is included for teams that need a reproducible deployment handoff. Because this is an Expo mobile-first project, Docker is used here for the web export and Firebase emulator stack, not for generating Android or iOS binaries.
+
 ## What It Includes
 
 - Worker login using Firebase Authentication
@@ -137,6 +139,55 @@ cd ..
 npm run start
 ```
 
+## Docker Stack
+
+### What It Covers
+
+- Builds the Expo web export in a dedicated Node container
+- Serves the built app through Nginx
+- Runs Firebase Auth, Firestore, Functions, and the Emulator UI in a separate container
+- Persists emulator state in a Docker volume
+- Supports emulator-aware app builds using environment variables
+
+### Docker Files
+
+- `Dockerfile.web`
+- `Dockerfile.firebase`
+- `docker-compose.yml`
+- `.dockerignore`
+- `docker/nginx.conf`
+
+### Environment For Docker
+
+For a local all-in-one stack using Firebase emulators, set these values in `.env`:
+
+```bash
+EXPO_PUBLIC_USE_FIREBASE_EMULATORS=true
+EXPO_PUBLIC_FIREBASE_EMULATOR_HOST=localhost
+EXPO_PUBLIC_FIREBASE_AUTH_EMULATOR_PORT=9099
+EXPO_PUBLIC_FIREBASE_FIRESTORE_EMULATOR_PORT=8085
+```
+
+### Run With Docker Compose
+
+```bash
+docker compose up --build
+```
+
+### Ports
+
+- `8080`: SiteTrack web app
+- `4000`: Firebase Emulator UI
+- `5001`: Firebase Functions emulator
+- `8085`: Firestore emulator
+- `9099`: Firebase Auth emulator
+
+### Deployment Notes
+
+- This compose stack is intended for cloud handoff, QA review, reproducible local setup, and backend integration testing.
+- Native iOS and Android releases should still be built with Expo/EAS or platform-native CI.
+- If your cloud team deploys the web container outside local Docker, update the emulator host or point the app at real Firebase services instead.
+
 ## Firebase Setup Checklist
 
 1. Create a Firebase project.
@@ -155,6 +206,7 @@ npm run start
 npm run android
 npm run ios
 npm run web
+npm run build:web
 npm run typecheck
 ```
 
