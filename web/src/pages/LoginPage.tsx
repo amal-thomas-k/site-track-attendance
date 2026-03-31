@@ -30,15 +30,16 @@ export function LoginPage() {
         <div className="brand brand--login">
           <span className="brand__mark">↯</span>
           <div>
-            <p className="brand__eyebrow">The Digital Foreman</p>
+            <p className="brand__eyebrow">Construction Workforce Management</p>
             <h1>SiteTrack Attendance</h1>
           </div>
         </div>
 
         <div className="hero-copy">
-          <h2>Hosted React workspace for workers and site admins.</h2>
+          <h2>Real-time attendance management for construction sites and field teams.</h2>
           <p>
-            This web app is generated from the Stitch screens and wired for Firebase hosting or emulator-backed local review.
+            Securely record worker check-ins with verified time and GPS location, monitor site activity live,
+            and manage workforce attendance from a centralized admin dashboard.
           </p>
         </div>
 
