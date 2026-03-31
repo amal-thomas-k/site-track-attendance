@@ -1,10 +1,11 @@
 import {
   User,
+  createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { addDoc, collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
 import {
   createContext,
   ReactNode,
@@ -23,6 +24,15 @@ interface AuthContextValue {
   user: SessionUser | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
+  signupWorker: (input: {
+    name: string;
+    assignedSite: string;
+    email: string;
+    password: string;
+    trade?: string;
+    zone?: string;
+    shift?: string;
+  }) => Promise<void>;
   loginDemo: (role: 'worker' | 'admin') => void;
   logout: () => Promise<void>;
   isFirebaseConfigured: boolean;
@@ -35,6 +45,24 @@ function toSessionUser(profile: AppUser, mode: SessionUser['mode']): SessionUser
     ...profile,
     mode,
   };
+}
+
+async function writeAuthLog(userId: string, email: string, action: 'sign_in' | 'sign_up') {
+  if (!db) {
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, 'loginLogs'), {
+      userId,
+      email,
+      action,
+      timestamp: new Date().toISOString(),
+      source: 'web',
+    });
+  } catch (error) {
+    console.error('Unable to write auth log.', error);
+  }
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -127,7 +155,40 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
         setLoading(true);
         try {
-          await signInWithEmailAndPassword(auth, email, password);
+          const credential = await signInWithEmailAndPassword(auth, email.trim(), password);
+          await writeAuthLog(credential.user.uid, email.trim(), 'sign_in');
+          clearDemoSession();
+        } finally {
+          setLoading(false);
+        }
+      },
+      async signupWorker(input) {
+        if (!auth || !db || !isFirebaseConfigured) {
+          throw new Error('Firebase is not configured for hosted sign up.');
+        }
+
+        setLoading(true);
+        try {
+          const credential = await createUserWithEmailAndPassword(
+            auth,
+            input.email.trim(),
+            input.password,
+          );
+
+          const profile: AppUser = {
+            id: credential.user.uid,
+            name: input.name.trim(),
+            role: 'worker',
+            assignedSite: input.assignedSite.trim(),
+            email: input.email.trim(),
+            trade: input.trade?.trim() || undefined,
+            zone: input.zone?.trim() || undefined,
+            shift: input.shift?.trim() || undefined,
+            availabilityStatus: 'active',
+          };
+
+          await setDoc(doc(db, 'users', credential.user.uid), profile);
+          await writeAuthLog(credential.user.uid, input.email.trim(), 'sign_up');
           clearDemoSession();
         } finally {
           setLoading(false);

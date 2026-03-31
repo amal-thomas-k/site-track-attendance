@@ -29,6 +29,15 @@ export interface AttendanceRecord {
   date: string;
 }
 
+export interface LoginLogRecord {
+  id: string;
+  userId: string;
+  email: string;
+  action: 'sign_in' | 'sign_up';
+  timestamp: string;
+  source: 'web';
+}
+
 export interface AppSettings {
   lateCutoffTime: string;
   defaultSite: string;

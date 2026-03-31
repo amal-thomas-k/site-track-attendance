@@ -5,6 +5,7 @@ import { LoadingView } from './components/LoadingView';
 import { useAuth } from './context/AuthContext';
 
 const LoginPage = lazy(() => import('./pages/LoginPage').then((module) => ({ default: module.LoginPage })));
+const SignupPage = lazy(() => import('./pages/SignupPage').then((module) => ({ default: module.SignupPage })));
 const WorkerHomePage = lazy(() =>
   import('./pages/worker/WorkerHomePage').then((module) => ({ default: module.WorkerHomePage })),
 );
@@ -71,6 +72,7 @@ export default function App() {
       <Routes>
         <Route element={<HomeRedirect />} path="/" />
         <Route element={<LoginPage />} path="/login" />
+        <Route element={<SignupPage />} path="/signup" />
 
         <Route element={<RequireRole role="worker" />}>
           <Route element={<WorkerHomePage />} path="/worker/check-in" />

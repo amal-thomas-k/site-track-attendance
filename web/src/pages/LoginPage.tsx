@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AlertTriangle, HardHat, LockKeyhole } from 'lucide-react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import { useAuth } from '../context/AuthContext';
 
@@ -10,7 +10,7 @@ export function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  if (user) {
+  if (user && !loading) {
     return <Navigate replace to={user.role === 'admin' ? '/admin/dashboard' : '/worker/check-in'} />;
   }
 
@@ -82,6 +82,13 @@ export function LoginPage() {
             <span>{loading ? 'Signing In...' : 'Sign In With Firebase'}</span>
           </button>
         </form>
+
+        <div className="auth-switch">
+          <span>New worker joining the project?</span>
+          <Link className="secondary-button" to="/signup">
+            <span>Create Worker Account</span>
+          </Link>
+        </div>
 
         <div className="login-demo">
           <button className="secondary-button" onClick={() => loginDemo('worker')} type="button">

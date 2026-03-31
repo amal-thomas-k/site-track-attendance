@@ -17,8 +17,16 @@ service cloud.firestore {
 
     match /users/{userId} {
       allow read: if isAdmin() || isCurrentUser(userId);
-      allow create: if isCurrentUser(userId);
-      allow update: if isAdmin() || isCurrentUser(userId);
+      allow create: if isCurrentUser(userId)
+        && request.resource.data.id == userId
+        && request.resource.data.role == 'worker'
+        && request.resource.data.name is string
+        && request.resource.data.assignedSite is string;
+      allow update: if isAdmin()
+        || (isCurrentUser(userId)
+          && request.resource.data.id == userId
+          && request.resource.data.role == resource.data.role
+          && request.resource.data.role == 'worker');
       allow delete: if false;
     }
 
@@ -31,6 +39,20 @@ service cloud.firestore {
         && request.resource.data.id == attendanceId
         && request.resource.data.date is string
         && request.resource.data.timestamp is string;
+
+      allow update, delete: if false;
+    }
+
+    match /loginLogs/{logId} {
+      allow read: if isAdmin()
+        || (isAuthenticated() && resource.data.userId == request.auth.uid);
+
+      allow create: if isAuthenticated()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.email is string
+        && request.resource.data.action in ['sign_in', 'sign_up']
+        && request.resource.data.timestamp is string
+        && request.resource.data.source == 'web';
 
       allow update, delete: if false;
     }

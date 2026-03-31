@@ -20,7 +20,7 @@ import { useAuth } from './AuthContext';
 import { db } from '../lib/firebase';
 import { loadDemoStore, saveDemoStore, updateDemoStore } from '../lib/demoStore';
 import { attendanceId, DEFAULT_SETTINGS, todayKey } from '../lib/utils';
-import { AppSettings, AppUser, AttendanceRecord } from '../types';
+import { AppSettings, AppUser, AttendanceRecord, LoginLogRecord } from '../types';
 
 const SETTINGS_KEY = 'sitetrack-web-settings';
 const READ_KEY = 'sitetrack-web-read-notifications';
@@ -28,6 +28,7 @@ const READ_KEY = 'sitetrack-web-read-notifications';
 interface AppDataContextValue {
   workers: AppUser[];
   attendance: AttendanceRecord[];
+  loginLogs: LoginLogRecord[];
   dataLoading: boolean;
   settings: AppSettings;
   readNotificationIds: string[];
@@ -97,10 +98,22 @@ function mapAttendance(data: Record<string, unknown>, id: string): AttendanceRec
   };
 }
 
+function mapLoginLog(data: Record<string, unknown>, id: string): LoginLogRecord {
+  return {
+    id,
+    userId: String(data.userId),
+    email: String(data.email ?? ''),
+    action: (data.action as LoginLogRecord['action']) ?? 'sign_in',
+    timestamp: String(data.timestamp),
+    source: (data.source as LoginLogRecord['source']) ?? 'web',
+  };
+}
+
 export function AppDataProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [workers, setWorkers] = useState<AppUser[]>([]);
   const [attendance, setAttendance] = useState<AttendanceRecord[]>([]);
+  const [loginLogs, setLoginLogs] = useState<LoginLogRecord[]>([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [settings, setSettings] = useState<AppSettings>(loadSettings);
   const [readNotificationIds, setReadNotificationIds] = useState<string[]>(loadReadNotifications);
@@ -109,6 +122,7 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
     if (!user) {
       setWorkers([]);
       setAttendance([]);
+      setLoginLogs([]);
       setDataLoading(false);
       return;
     }
@@ -126,11 +140,13 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
           (left, right) => new Date(right.timestamp).getTime() - new Date(left.timestamp).getTime(),
         ),
       );
+      setLoginLogs([]);
       setDataLoading(false);
       return;
     }
 
     if (!db) {
+      setLoginLogs([]);
       setDataLoading(false);
       return;
     }
@@ -139,6 +155,7 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
     const unsubscribers: Array<() => void> = [];
 
     if (user.role === 'admin') {
+      setLoginLogs([]);
       unsubscribers.push(
         onSnapshot(
           query(collection(db, 'users'), where('role', '==', 'worker')),
@@ -168,6 +185,19 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
           },
         ),
       );
+      unsubscribers.push(
+        onSnapshot(
+          query(
+            collection(db, 'loginLogs'),
+            where('userId', '==', user.id),
+            orderBy('timestamp', 'desc'),
+          ),
+          (snapshot) => {
+            setLoginLogs(snapshot.docs.map((item) => mapLoginLog(item.data(), item.id)));
+            setDataLoading(false);
+          },
+        ),
+      );
     }
 
     return () => {
@@ -179,6 +209,7 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
     () => ({
       workers,
       attendance,
+      loginLogs,
       dataLoading,
       settings,
       readNotificationIds,
@@ -281,7 +312,7 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
         setWorkers(nextStore.users.filter((item) => item.role === 'worker'));
       },
     }),
-    [attendance, dataLoading, readNotificationIds, settings, user, workers],
+    [attendance, dataLoading, loginLogs, readNotificationIds, settings, user, workers],
   );
 
   return <AppDataContext.Provider value={value}>{children}</AppDataContext.Provider>;
