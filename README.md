@@ -254,6 +254,13 @@ cd web
 npm run build
 ```
 
+Firebase Hosting deploy:
+
+```bash
+cd ..
+firebase deploy --only hosting --project sitetrack-attendance-prod
+```
+
 ## Firebase Setup Checklist
 
 1. Create a Firebase project.

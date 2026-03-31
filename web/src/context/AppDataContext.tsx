@@ -116,8 +116,13 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
     if (user.mode === 'demo') {
       const store = loadDemoStore();
       setWorkers(store.users.filter((item) => item.role === 'worker'));
+      const demoAttendance =
+        user.role === 'admin'
+          ? store.attendance
+          : store.attendance.filter((item) => item.userId === user.id);
+
       setAttendance(
-        [...store.attendance].sort(
+        [...demoAttendance].sort(
           (left, right) => new Date(right.timestamp).getTime() - new Date(left.timestamp).getTime(),
         ),
       );

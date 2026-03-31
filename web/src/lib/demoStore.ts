@@ -37,6 +37,17 @@ function buildSeedUsers(): AppUser[] {
       availabilityStatus: 'active',
     },
     {
+      id: 'worker-asha-nair',
+      name: 'Asha Nair',
+      role: 'worker',
+      assignedSite: 'Beta Site - South Block',
+      email: 'asha@sitetrack.local',
+      trade: 'Survey Assistant',
+      zone: 'South Gate',
+      shift: '08:00 - 16:00',
+      availabilityStatus: 'active',
+    },
+    {
       id: 'worker-arjun-wallace',
       name: 'Arjun Wallace',
       role: 'worker',
@@ -151,6 +162,16 @@ function seedStore(): DemoStore {
   };
 }
 
+function mergeSeedUsers(store: DemoStore): DemoStore {
+  const seededUsers = buildSeedUsers();
+  const existingIds = new Set(store.users.map((user) => user.id));
+
+  return {
+    ...store,
+    users: [...store.users, ...seededUsers.filter((user) => !existingIds.has(user.id))],
+  };
+}
+
 export function loadDemoStore(): DemoStore {
   const raw = localStorage.getItem(STORE_KEY);
 
@@ -161,7 +182,7 @@ export function loadDemoStore(): DemoStore {
   }
 
   try {
-    return JSON.parse(raw) as DemoStore;
+    return mergeSeedUsers(JSON.parse(raw) as DemoStore);
   } catch {
     const store = seedStore();
     localStorage.setItem(STORE_KEY, JSON.stringify(store));
@@ -208,9 +229,31 @@ export function clearDemoSession() {
 
 export function resolveDemoUser(role: 'worker' | 'admin') {
   const store = loadDemoStore();
+  if (role === 'admin') {
+    return (
+      store.users.find((user) => user.role === role && user.name === 'R. Foreman') ||
+      store.users.find((user) => user.role === role) ||
+      null
+    );
+  }
+
+  const todayAttendanceIds = new Set(
+    store.attendance
+      .filter((record) => record.date === todayKey())
+      .map((record) => record.userId),
+  );
+
+  const workers = store.users.filter((user) => user.role === role);
+  const availableWorkers = workers.filter((user) => !todayAttendanceIds.has(user.id));
+  const activeAvailableWorkers = availableWorkers.filter(
+    (user) => user.availabilityStatus === 'active',
+  );
+
   return (
-    store.users.find((user) => user.role === role && user.name === (role === 'admin' ? 'R. Foreman' : 'John Doe')) ||
-    store.users.find((user) => user.role === role) ||
+    activeAvailableWorkers.at(-1) ||
+    availableWorkers.at(-1) ||
+    workers.find((user) => user.name === 'John Doe') ||
+    workers.at(0) ||
     null
   );
 }
